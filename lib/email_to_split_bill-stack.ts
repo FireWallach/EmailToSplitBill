@@ -67,7 +67,7 @@ export class EmailToSplitBillStack extends cdk.Stack {
 
     // Schedule
     const checkEmailRule = new events.Rule(this, "Rule", {
-      schedule: events.Schedule.rate(cdk.Duration.minutes(10)),
+      schedule: events.Schedule.rate(cdk.Duration.hours(6)),
     });
 
     checkEmailRule.addTarget(new targets.LambdaFunction(checkForBillLambda));
