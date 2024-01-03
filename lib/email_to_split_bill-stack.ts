@@ -14,12 +14,12 @@ export class EmailToSplitBillStack extends cdk.Stack {
     // Declarations
     const splitwiseLayer = new LayerVersion(this, "SplitwiseLayer", {
       code: Code.fromAsset(path.join(__dirname, "/lambda-layer")),
-      compatibleRuntimes: [Runtime.NODEJS_16_X],
+      compatibleRuntimes: [Runtime.NODEJS_20_X],
     });
 
     const emailLayer = new LayerVersion(this, "EmailLayer", {
       code: Code.fromAsset(path.join(__dirname, "email-layer")),
-      compatibleRuntimes: [Runtime.NODEJS_16_X],
+      compatibleRuntimes: [Runtime.NODEJS_20_X],
     });
 
     const splitwiseSecret = new secretsmanager.Secret(
@@ -31,7 +31,7 @@ export class EmailToSplitBillStack extends cdk.Stack {
     );
 
     const handleEmailLambda: Function = new Function(this, "handleEmail", {
-      runtime: Runtime.NODEJS_16_X,
+      runtime: Runtime.NODEJS_20_X,
       code: Code.fromAsset(path.join(__dirname, "../deploy")),
       handler: "handleEmail.handler",
       layers: [splitwiseLayer],
@@ -42,7 +42,7 @@ export class EmailToSplitBillStack extends cdk.Stack {
     });
 
     const checkForBillLambda: Function = new Function(this, "checkForBill", {
-      runtime: Runtime.NODEJS_16_X,
+      runtime: Runtime.NODEJS_20_X,
       code: Code.fromAsset(path.join(__dirname, "../deploy")),
       handler: "checkForBill.handler",
       layers: [emailLayer],

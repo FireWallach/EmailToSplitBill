@@ -9,7 +9,7 @@
     "build-lambda": "bash build.sh",
     "watch": "tsc -w",
     "test": "jest",
-    "deploy": "npm run build-lambda && cdk deploy"
+    "deploy": "npm run build-lambda && npx cdk deploy"
   },
   "devDependencies": {
     "@types/jest": "^29.5.11",
